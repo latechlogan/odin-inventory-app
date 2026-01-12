@@ -4,22 +4,26 @@ require("dotenv").config();
 
 const { Client } = require("pg");
 
-const SQL = `
-    CREATE TABLE artists (
+const createArtistsTable = `
+    CREATE TABLE IF NOT EXISTS artists (
         artist_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
         artist_name VARCHAR(255)
-    )
+    );
+`;
 
-    CREATE TABLE genres (
+const createGenresTable = `
+    CREATE TABLE IF NOT EXISTS genres (
         genre_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
         genre_name VARCHAR(255)
-    )
+    );
+`;
 
-    CREATE TABLE albums (
+const createAlbumsTable = `
+    CREATE TABLE IF NOT EXISTS albums (
         album_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
         album_title VARCHAR(255),
-        FOREIGN KEY (artist_id) REFERENCES artists(artist_id) ON DELETE RESTRICT,
-        FOREIGN KEY (genre_id) REFERENCES genres(genre_id) ON DELETE RESTRICT,
+        artist_id INTEGER REFERENCES artists(artist_id) ON DELETE RESTRICT,
+        genre_id INTEGER REFERENCES genres(genre_id) ON DELETE RESTRICT,
         release_date SMALLINT
     );
 `;
@@ -30,7 +34,9 @@ async function migrate() {
     connectionString: process.env.DATABASE_URL,
   });
   await client.connect();
-  await client.query(SQL);
+  await client.query(createArtistsTable);
+  await client.query(createGenresTable);
+  await client.query(createAlbumsTable);
   await client.end();
   console.log("done");
 }
