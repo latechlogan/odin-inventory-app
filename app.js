@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
 
-const albumRouter = require("./routes/albumRouter");
-const genreRouter = require("./routes/genreRouter");
+const albumsRouter = require("./routes/albumsRouter");
+const genresRouter = require("./routes/genresRouter");
 
 const PORT = 3000;
 const APP = "Odin Inventory Application";
@@ -10,7 +10,7 @@ const APP = "Odin Inventory Application";
 app.get("/", (req, res) => {
   res.send("Homepage");
 });
-app.use("/album", albumRouter);
-app.use("/genre", genreRouter);
+app.use("/albums", albumsRouter);
+app.use("/genres", genresRouter);
 
 app.listen(PORT, () => console.log(`${APP}: listening on port ${PORT}`));
