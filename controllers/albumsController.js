@@ -5,7 +5,7 @@ const list = (req, res) => {
 };
 
 const show = (req, res) => {
-  const id = req.params;
+  const id = req.params.albumId;
   res.send(`albums controller: show method with ${id}`);
 };
 
@@ -22,12 +22,12 @@ const updateGet = (req, res) => {
 };
 
 const updatePost = (req, res) => {
-  const id = req.params;
-  res.send(`ablums controller: post the album with id (${id}) to the db`);
+  const id = req.params.albumId;
+  res.send(`albums controller: post the album with id (${id}) to the db`);
 };
 
 const destroy = (req, res) => {
-  const id = req.params;
+  const id = req.params.albumId;
   res.send(`albums controller: delete album with id: ${id}`);
 };
 

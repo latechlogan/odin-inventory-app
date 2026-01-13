@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 const albumsRouter = require("./routes/albumsRouter");
 const genresRouter = require("./routes/genresRouter");
 
