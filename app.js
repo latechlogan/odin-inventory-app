@@ -6,13 +6,12 @@ app.use(express.json());
 
 const albumsRouter = require("./routes/albumsRouter");
 const genresRouter = require("./routes/genresRouter");
+const indexController = require("./controllers/indexController");
 
 const PORT = 3000;
 const APP = "Odin Inventory Application";
 
-app.get("/", (req, res) => {
-  res.send("Homepage");
-});
+app.get("/", indexController.index);
 app.use("/albums", albumsRouter);
 app.use("/genres", genresRouter);
 
