@@ -1,34 +1,55 @@
-//require db
+const db = require("../db/queries");
 
-const list = (req, res) => {
-  res.send("albums controller: index method works!");
+const list = async (req, res) => {
+  const albums = await db.listAllAlbums();
+  const albumsList = albums.map((row) => row.album_title).join(", ");
+  res.send(albumsList);
 };
 
-const show = (req, res) => {
+const show = async (req, res) => {
   const id = req.params.albumId;
-  res.send(`albums controller: show method with ${id}`);
+  const album = await db.showAlbum(id);
+
+  if (!album) {
+    return res.status(404).send("Album not found");
+  }
+
+  res.send(album);
 };
 
 const createGet = (req, res) => {
-  res.send("albums controller: get the create album form");
+  res.send("creat album form");
 };
 
-const createPost = (req, res) => {
-  res.send("albums controller: post the new album to the db");
+const createPost = async (req, res) => {
+  const albumTitle = req.body.albumTitle;
+  const artistName = req.body.artistName;
+  const genreName = req.body.genreName;
+  const releaseDate = req.body.releaseDate;
+
+  await db.createNewAlbum(albumTitle, artistName, genreName, releaseDate);
+  res.redirect("/albums");
 };
 
 const updateGet = (req, res) => {
-  res.send("albums controller: get the edit album form");
+  res.send("update album form");
 };
 
-const updatePost = (req, res) => {
+const updatePost = async (req, res) => {
   const id = req.params.albumId;
-  res.send(`albums controller: post the album with id (${id}) to the db`);
+  const albumTitle = req.body.albumTitle;
+  const artistName = req.body.artistName;
+  const genreName = req.body.genreName;
+  const releaseDate = req.body.releaseDate;
+
+  await db.updateAlbum(id, albumTitle, artistName, genreName, releaseDate);
+  res.redirect("/");
 };
 
-const destroy = (req, res) => {
+const destroy = async (req, res) => {
   const id = req.params.albumId;
-  res.send(`albums controller: delete album with id: ${id}`);
+  await db.deleteAlbum(id);
+  res.redirect("/");
 };
 
 module.exports = {
