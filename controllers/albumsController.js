@@ -2,7 +2,7 @@ const db = require("../db/queries");
 
 const list = async (req, res) => {
   const albums = await db.listAllAlbums();
-  res.send(albums);
+  res.render("albums/index", { albums: albums });
 };
 
 const show = async (req, res) => {
@@ -13,7 +13,7 @@ const show = async (req, res) => {
     return res.status(404).send("Album not found");
   }
 
-  res.send(album);
+  res.render("albums/show", { album: album });
 };
 
 const createGet = (req, res) => {

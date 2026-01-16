@@ -24,7 +24,8 @@ async function listAlbumsByGenre(id) {
     `SELECT albums.*, artists.artist_name
      FROM albums
      JOIN artists ON albums.artist_id = artists.artist_id
-     WHERE albums.genre_id = $1`,
+     WHERE albums.genre_id = $1
+     ORDER BY release_date DESC`,
     [id]
   );
   return rows;
@@ -36,13 +37,23 @@ async function deleteGenre(id) {
 
 //albums
 async function listAllAlbums() {
-  const { rows } = await pool.query("SELECT * FROM albums");
+  const { rows } = await pool.query(
+    `SELECT albums.*, artists.artist_name
+    FROM albums
+    JOIN artists ON albums.artist_id = artists.artist_id
+    ORDER BY release_date DESC`
+  );
   return rows;
 }
 
 async function showAlbum(id) {
   const { rows } = await pool.query(
-    "SELECT * FROM albums WHERE album_id = $1",
+    `SELECT * FROM albums
+    JOIN artists
+    ON albums.artist_id = artists.artist_id
+    JOIN genres
+    ON albums.genre_id = genres.genre_id
+    WHERE album_id = $1`,
     [id]
   );
   return rows[0];

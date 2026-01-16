@@ -73,7 +73,16 @@ h6 {
   padding: 1rem;
 }
 
+/* found in: genres/index.ejs */
 .genres-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+/* found in: albums/show.ejs */
+.album-details {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
