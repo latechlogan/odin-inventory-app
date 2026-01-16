@@ -23,6 +23,7 @@
   "homepage": "https://github.com/latechlogan/odin-inventory-app#readme",
   "dependencies": {
     "dotenv": "^17.2.3",
+    "ejs": "^4.0.1",
     "express": "^5.2.1",
     "pg": "^8.16.3"
   }

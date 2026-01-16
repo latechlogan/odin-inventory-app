@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Odin | Inventory App</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <h1><%= genre.genre_name %></h1>
+    <ul>
+      <% albums.forEach(album => { %>
+      <li>
+        <a href="/albums/<%= album.album_id %>">
+          <strong><%= album.album_title %></strong>
+          <br />
+          <small><%= album.artist_name %></small>
+        </a>
+      </li>
+      <% }) %>
+    </ul>
+  </body>
+</html>
