@@ -45,13 +45,14 @@ const updatePost = async (req, res) => {
   const releaseDate = req.body.releaseDate;
 
   await db.updateAlbum(id, albumTitle, artistName, genreName, releaseDate);
-  res.redirect("/");
+  res.redirect(`/albums/${id}`);
 };
 
 const destroy = async (req, res) => {
   const id = req.params.albumId;
+  const album = await db.showAlbum(id);
   await db.deleteAlbum(id);
-  res.redirect("/");
+  res.redirect(`/genres/${album.genre_id}`);
 };
 
 module.exports = {
