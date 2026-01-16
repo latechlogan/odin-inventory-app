@@ -7,7 +7,7 @@ async function deleteArtist(id) {
 
 //genres
 async function listAllGenres() {
-  const { rows } = await pool.query("SELECT genre_name FROM genres");
+  const { rows } = await pool.query("SELECT genre_id, genre_name FROM genres");
   return rows;
 }
 
@@ -17,6 +17,17 @@ async function showGenre(id) {
     [id]
   );
   return rows[0];
+}
+
+async function listAlbumsByGenre(id) {
+  const { rows } = await pool.query(
+    `SELECT albums.*, artists.artist_name
+     FROM albums
+     JOIN artists ON albums.artist_id = artists.artist_id
+     WHERE albums.genre_id = $1`,
+    [id]
+  );
+  return rows;
 }
 
 async function deleteGenre(id) {
@@ -112,6 +123,7 @@ module.exports = {
   // genres
   listAllGenres,
   showGenre,
+  listAlbumsByGenre,
   deleteGenre,
   // albums
   listAllAlbums,

@@ -2,8 +2,7 @@ const db = require("../db/queries");
 
 const list = async (req, res) => {
   const genres = await db.listAllGenres();
-  const genresList = genres.map((row) => row.genre_name).join(", ");
-  res.send(genresList);
+  res.render("genres/index", { genres: genres });
 };
 
 const show = async (req, res) => {
@@ -14,7 +13,9 @@ const show = async (req, res) => {
     return res.status(404).send("Genre not found");
   }
 
-  res.send(genre);
+  const albums = await db.listAlbumsByGenre(id);
+
+  res.render("genres/show", { genre: genre, albums: albums });
 };
 
 const destroy = async (req, res) => {

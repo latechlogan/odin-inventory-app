@@ -2,8 +2,7 @@ const db = require("../db/queries");
 
 const list = async (req, res) => {
   const albums = await db.listAllAlbums();
-  const albumsList = albums.map((row) => row.album_title).join(", ");
-  res.send(albumsList);
+  res.send(albums);
 };
 
 const show = async (req, res) => {
