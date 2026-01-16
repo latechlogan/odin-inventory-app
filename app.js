@@ -6,7 +6,7 @@ const indexRouter = require("./routes/indexRouter");
 const albumsRouter = require("./routes/albumsRouter");
 const genresRouter = require("./routes/genresRouter");
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const APP = "Odin Inventory Application";
 
 app.use(express.urlencoded({ extended: true }));
