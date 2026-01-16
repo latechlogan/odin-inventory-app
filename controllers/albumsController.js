@@ -17,7 +17,7 @@ const show = async (req, res) => {
 };
 
 const createGet = (req, res) => {
-  res.send("creat album form");
+  res.render("albums/create");
 };
 
 const createPost = async (req, res) => {
@@ -30,8 +30,11 @@ const createPost = async (req, res) => {
   res.redirect("/albums");
 };
 
-const updateGet = (req, res) => {
-  res.send("update album form");
+const updateGet = async (req, res) => {
+  const id = req.params.albumId;
+  const album = await db.showAlbum(id);
+
+  res.render("albums/edit", { album: album });
 };
 
 const updatePost = async (req, res) => {

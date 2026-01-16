@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Odin | Inventory App</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Add an Album</h1>
+      <form action="" method="post" class="create-album-form">
+        <label for="albumTitle" class="required">Album Title</label>
+        <input
+          type="text"
+          name="albumTitle"
+          id="albumTitle"
+          value="<%= album.album_title %>"
+          required
+        />
+
+        <label for="artistName" class="required">Album Artist</label>
+        <input
+          type="text"
+          name="artistName"
+          id="artistName"
+          value="<%= album.artist_name %>"
+          required
+        />
+
+        <label for="genreName" class="required">Album Genre</label>
+        <input
+          type="text"
+          name="genreName"
+          id="genreName"
+          value="<%= album.genre_name %>"
+          required
+        />
+
+        <label for="releaseDate">Release Date (YYYY):</label>
+        <input
+          type="text"
+          name="releaseDate"
+          id="releaseDate"
+          value="<%= album.release_date %>"
+        />
+
+        <button type="submit">Add Album</button>
+      </form>
+    </main>
+  </body>
+</html>

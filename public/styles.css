@@ -88,3 +88,17 @@ h6 {
   justify-content: flex-start;
   align-items: flex-start;
 }
+
+/* found in: albums/create.ejs */
+.create-album-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+label.required::after {
+  content: " *"; /* Add a space before the asterisk */
+  color: red; /* Make it red for visibility */
+  font-weight: bold;
+}
