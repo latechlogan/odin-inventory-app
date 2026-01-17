@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/styles.css" />
   </head>
   <body>
+    <%- include('../partials/nav') %>
     <h1><%= genre.genre_name %></h1>
     <ul>
       <% albums.forEach(album => { %>
